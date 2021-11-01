@@ -1,0 +1,62 @@
+  <!-- Navbar start -->
+    <nav class="navbar">
+      <!-- Reference: https://www.gethalfmoon.com/docs/navbar -->
+       <button class="btn btn-action mr-5" type="button" onclick="halfmoon.toggleDarkMode()"
+                aria-label="Toggle dark mode">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle-half" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 15V1a7 7 0 1 1 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+                </svg>
+            </button>
+            <!-- Navbar brand -->
+            <a href="{% url 'home' %}" class="navbar-brand">
+                HTMX-TicTacToe
+            </a>
+            <ul class="navbar-nav d-none d-md-flex ml-auto">
+            {% if user.is_authenticated %}
+                
+                <li 
+                class="nav-item"
+                hx-post="{% url 'account_logout' %}"
+                hx-trigger= "click"
+                hx-confirm="Are you sure you wish to log out?"
+                hx-target= "#content">
+                <span class="nav-link"> Log out </span>
+                </li>
+               
+            {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'account_login' %}" class="nav-link">log in</a>
+                </li>
+            {% endif %}
+            </ul>
+
+            <div class="navbar-content d-md-none ml-auto">
+                <div class="dropdown with-arrow">
+                    <button class="btn" data-toggle="dropdown" type="button" id="navbar-dropdown-toggle-btn-1">
+                        Menu
+                    </button>
+
+                    <div 
+                    class="dropdown-menu dropdown-menu-right w-200" 
+                    aria-labelledby="navbar-dropdown-toggle-btn-1"
+                    >
+
+                        {% if user.is_authenticated %}
+                        <span 
+                        class="nav-link" 
+                        hx-post="{% url 'account_logout' %}"
+                        hx-trigger= "click"
+                        hx-confirm="Are you sure you wish to log out?"
+                        hx-target= "#content">
+                        Log out 
+                        </span>
+                        {% else %}
+                        <a href="{% url 'account_login' %}" class="nav-link">Log in</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+    </nav>
+    <!-- Navbar end -->

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+<div class= "content">
+<div class="game">
+    <div class="game-board">
+
+
+{% if not request.user.is_authenticated %}
+<p> To play the game, please <a href="{% url 'account_signup' %}"> Sign up </a>
+
+{% else %}
+
+{% for i in request.user.board %}
+    <div class="board-row">
+    {% for j in i %}
+    <button
+    class="square"
+    > 
+    
+    </button>
+    {% endfor %}
+    </div>
+{%endfor %}
+<div class="game-info mt-20">
+    <div class="status"> 
+    You are Player X. <a href= "#"> Change to O </a>
+</div>
+</div>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

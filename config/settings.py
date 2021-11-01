@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "accounts",
     "allauth.socialaccount",
+    "tictactoe",
 ]
 
 MIDDLEWARE = [
