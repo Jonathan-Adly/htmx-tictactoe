@@ -1,0 +1,12 @@
+<div class="game-info mt-20" id="game_info">
+    <div class="status"> 
+    You are Player {{request.user.player}}. 
+    
+    <button
+    hx-get="{% url 'change_player' %}"
+    hx-target= "#game_info"
+    hx-swap = "outerHTML"
+    >
+     Change Your symbol </button>
+</div>
+</div>

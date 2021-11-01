@@ -23,11 +23,8 @@
     {% endfor %}
     </div>
 {%endfor %}
-<div class="game-info mt-20">
-    <div class="status"> 
-    You are Player X. <a href= "#"> Change to O </a>
-</div>
-</div>
+{% include 'components/game_info.html' %}
+
 {% endif %}
 </div>
 </div>
