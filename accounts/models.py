@@ -5,7 +5,10 @@ from django.db import models
 
 """
 Our Board should look like this initially = [[0,0,0],[0,0,0],[0,0,0]]
-Then as players play, it should look like this = [[x,0,y], [x,y,0], [0,0,0]]
+Then as players play, it should look like this = [[1,0,2], [1,2,0], [0,0,0]]
+empty = 0
+X = 1
+O = 2
 """
 
 
