@@ -3,6 +3,7 @@
 {% block content %}
 <div class="container-fluid">
 <div class= "content">
+
 <div class="game">
     <div class="game-board">
 
@@ -15,15 +16,21 @@
 {% for i in request.user.board %}
     <div class="board-row">
     {% for j in i %}
-    <button
-    class="square"
-    > 
-    
-    </button>
+        <form 
+        hx-post="{% url 'play' %}"
+        hx-target="this"
+        hx-swap="outerHTML"
+        >
+        <input type="hidden" name="row" value={{forloop.parentloop.counter0}}>
+        <input type="hidden" name="col" value={{forloop.counter0}}>
+        <button class="square"> </button>
+    </form>
     {% endfor %}
     </div>
 {%endfor %}
+
 {% include 'components/game_info.html' %}
+<a href= "{% url 'reset' %}"> Reset the game </a>
 
 {% endif %}
 </div>

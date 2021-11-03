@@ -3,10 +3,11 @@
     You are Player {{request.user.player}}. 
     
     <button
+    id="change_symbol_button"
     hx-get="{% url 'change_player' %}"
     hx-target= "#game_info"
     hx-swap = "outerHTML"
     >
      Change Your symbol </button>
 </div>
-</div>
+</div>  
