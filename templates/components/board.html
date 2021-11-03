@@ -13,7 +13,7 @@
         <input type="hidden" name="col" value={{forloop.counter0}}>
         <button
        class="square"
-        {% if not col == 0 %} disabled {% endif %}>
+        {% if col != 0 %} disabled {% endif %}>
         <!-- everytime we render the board, we will update our state -->
         {% if col == 1 %}
             X
