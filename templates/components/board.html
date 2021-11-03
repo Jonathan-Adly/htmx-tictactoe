@@ -1,0 +1,27 @@
+<!-- in board.html -->
+<div id="board"> <!-- new -->
+{% for rows in request.user.board %} <!-- rows is better than "i" -->
+    <div class="board-row">
+    {% for col in rows %} <!-- col is better than "j" -->
+    <!-- target have changed -->
+        <form 
+        hx-post="{% url 'play' %}"
+        hx-target="#board"
+        hx-swap="outerHTML"
+        >
+        <input type="hidden" name="row" value={{forloop.parentloop.counter0}}>
+        <input type="hidden" name="col" value={{forloop.counter0}}>
+        <button class="square">
+        <!-- everytime we render the board, we will update our state -->
+        {% if col == 1 %}
+            X
+        {% elif col == 2 %}
+            O
+        {% endif %}
+        </button>
+    </form>
+    {% endfor %}
+    </div>
+{% endfor %}
+</div>
+

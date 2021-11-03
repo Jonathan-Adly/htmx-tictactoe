@@ -1,13 +1,34 @@
-<div class="game-info mt-20" id="game_info">
+<!-- templates/components/game_info.html -->
+<!-- our #game-info element would be updated 
+on the appearance the checkGameStatus header.
+It would be replaced by the response 
+from a GET request to the "game_status" URL 
+-->
+<div class="game-info mt-20" 
+id="game_info"
+hx-trigger="checkGameStatus from:body"
+hx-target="#game_info"
+hx-get = "{% url 'game_status' %}"
+hx-swap = "outerHTML"
+>
     <div class="status"> 
     You are Player {{request.user.player}}. 
+    <!-- status will be included in the response 
+    coming from the "game_status" URL -->
     
-    <button
-    id="change_symbol_button"
+    {% if status %}
+     <p> Status: {{status}} </p>
+    {% else %}
+        <button
     hx-get="{% url 'change_player' %}"
     hx-target= "#game_info"
     hx-swap = "outerHTML"
+    hx-trigger= "click"
     >
      Change Your symbol </button>
-</div>
+
+    {% endif %}
+
+    </div>
+
 </div>  

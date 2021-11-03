@@ -2,39 +2,24 @@
 
 {% block content %}
 <div class="container-fluid">
-<div class= "content">
+    <div class= "content">
 
-<div class="game">
-    <div class="game-board">
+        <div class="game">
+            <div class="game-board">
 
+            {% if not request.user.is_authenticated %}
 
-{% if not request.user.is_authenticated %}
-<p> To play the game, please <a href="{% url 'account_signup' %}"> Sign up </a>
+            <p> To play the game, please <a href="{% url 'account_signup' %}"> Sign up </a>
 
-{% else %}
+            {% else %}
 
-{% for i in request.user.board %}
-    <div class="board-row">
-    {% for j in i %}
-        <form 
-        hx-post="{% url 'play' %}"
-        hx-target="this"
-        hx-swap="outerHTML"
-        >
-        <input type="hidden" name="row" value={{forloop.parentloop.counter0}}>
-        <input type="hidden" name="col" value={{forloop.counter0}}>
-        <button class="square"> </button>
-    </form>
-    {% endfor %}
+            {% include 'components/board.html' %}
+            {% include 'components/game_info.html' %}
+            <a href= "{% url 'reset' %}"> Reset the game </a>
+
+            {% endif %}
+            </div>
+        </div>
     </div>
-{%endfor %}
-
-{% include 'components/game_info.html' %}
-<a href= "{% url 'reset' %}"> Reset the game </a>
-
-{% endif %}
-</div>
-</div>
-</div>
 </div>
 {% endblock content %}
