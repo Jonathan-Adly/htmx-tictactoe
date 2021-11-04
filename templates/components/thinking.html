@@ -1,0 +1,10 @@
+ 
+ {% if user_played and not game_won %}
+          
+<div hx-trigger= "load delay:1s"
+                hx-get= "{% url 'computer_play' %}"
+                hx-target= "#board"
+                hx-swap="outerHTML">
+                thinking...
+</div>
+{% endif %}

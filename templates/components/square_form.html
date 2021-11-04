@@ -1,0 +1,9 @@
+<form 
+        hx-post="{% url 'play' %}"
+        hx-target="#board"
+        hx-swap="outerHTML"
+        >
+        <input type="hidden" name="row" value={{forloop.parentloop.counter0}}>
+        <input type="hidden" name="col" value={{forloop.counter0}}>
+        {% include 'components/square.html' %}
+</form>

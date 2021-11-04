@@ -1,0 +1,10 @@
+<button
+       class="square"
+        {% if col != 0 %} disabled {% endif %}>
+        <!-- everytime we render the board, we will update our state -->
+        {% if col == 1 %}
+            X
+        {% elif col == 2 %}
+            O
+        {% endif %}
+        </button>

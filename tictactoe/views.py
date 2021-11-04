@@ -28,13 +28,6 @@ def change_player(request):
 @require_POST
 @login_required
 def play(request):
-    """
-    This view first processes the user move and saves it. Then, process the computer move
-    and saves it. Finally, it returns the new board with the 2 moves to the front end with
-    a response header. The response header would trigger a request to check the game status
-    which affects a different element in the DOM.
-    """
-    # the user move
     if request.user.player == "X":
         player = 1
     else:
@@ -43,11 +36,30 @@ def play(request):
     col = int(request.POST["col"])
     request.user.board[row][col] = player
     request.user.save()
+    status = check_status(request.user.board)
+    if status == "X" or status == "O":
+        game_won = True
+    else:
+        game_won = False
+    response = render(
+        request, "components/board.html", {"user_played": True, "game_won": game_won}
+    )
+    response["HX-Trigger"] = "checkGameStatus"
+    return response
 
+
+@login_required
+def computer_play(request):
     # the computer move
     computer_move(request.user)
-    # the response with the header
-    response = render(request, "components/board.html")
+    status = check_status(request.user.board)
+    if status == "X" or status == "O":
+        game_won = True
+    else:
+        game_won = False
+    response = render(
+        request, "components/board.html", {"user_played": False, "game_won": game_won}
+    )
     response["HX-Trigger"] = "checkGameStatus"
     return response
 
@@ -66,4 +78,10 @@ def game_status(request):
     The game could a new game, in progress, finished with a winner or finished with a tie.
     """
     status = check_status(request.user.board)
-    return render(request, "components/game_info.html", {"status": status})
+    if status == "X" or status == "Y":
+        status = f"The {status} Player have won the game!"
+    return render(
+        request,
+        "components/game_info.html",
+        {"status": status},
+    )

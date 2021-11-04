@@ -20,8 +20,7 @@ def computer_move(user):
 
 def check_status(board):
     if check_winner(board) != 0:
-        status = f"The {check_winner(board)} player have won the game"
-        return status
+        return check_winner(board)
     flat_list = []
     for row in board:
         for col in row:
